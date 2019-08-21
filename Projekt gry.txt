@@ -1,0 +1,17 @@
+Projekt gry. 
+
+Menu.
+
+W menu będzie można wybierać kto jest komputerem, wpisywać imię gracza, wybierać ilość rund i włączyć grę.
+
+Po wciśnięciu gry wyskoczy nowe okienko w którym pojawi się plansza do gry. Po prawej stronie będzie ilość wygranych
+gracza 1 i gracza 2 oraz ilość odbytych rund. 
+
+Wybranie tego okienka jest równoznaczne z rozpoczęciem jednej z gier. Gier będzie tyle ile rund zostało wybranych.
+A więc mogą być np. 3 rundy wybrane w menu. I rozpoczyna się pierwsza, jeśli gracz1 rozpoczyna to używa myszki żeby
+wybrać akcję. WYbiera miejsce, i w to miejsce po wciśnięciu przycisku myszy pojawia się obiekt - kółko lub krzyżyk
+w zależności od wyboru gracza wcześniej czym chce grać. W momencie gdy dochodzi do remisu, wygranej jednego z graczy
+to runda się kończy, pojawia się stosowny komunikat i następuje przejście do kolejnej rundy. Liczniki rund się zmieniają,
+liczba punktów graczy także.
+
+W momencie gdy dochodzi do końca rund wyłaniany jest zwycięzca.
