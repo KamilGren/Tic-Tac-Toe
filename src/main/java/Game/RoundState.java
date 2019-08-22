@@ -11,9 +11,9 @@ public class RoundState {
 
     public RoundState() {
         Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.O));
-        System.out.println("Konstruktor z RoundState!" + boardFields[0][0] + hasFigureWon(Figure.X));
-        System.out.println(hasWonHorizontal(Figure.X));
-        System.out.println(boardFields[0][0].equals(Figure.X));
+        System.out.println("Konstruktor z RoundState!" + boardFields[0][0] + hasFigureWon(Figure.X)); // sprawdzam czy dziala
+        System.out.println(hasWonHorizontal(Figure.X)); // to tylko do wgladu czy mniejsze metody dzialaja
+        System.out.println(boardFields[0][0].equals(Figure.X)); //i czy equals dziala prawidlowo
 
         //czyli sieka tablice na pojedyncze czlony i kazdy z nich wypelnia stanem Figury (jedna z figur)
         //- pustą
