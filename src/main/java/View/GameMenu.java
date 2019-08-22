@@ -10,7 +10,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import static javafx.application.Application.STYLESHEET_CASPIAN;
 
 
 public class GameMenu {
