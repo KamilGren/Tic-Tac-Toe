@@ -34,7 +34,7 @@ public class RoundState {
     }
 
     public boolean hasFigureWon(Figure figure) {
-        if (hasWonHorizontal(figure) == true || hasWonVertical(figure) == true || hasWonDiagonallyDownLeft(figure) == true || hasWonDiagonallyUpLeft(figure) == true
+        if (hasWonHorizontal(figure) == true || hasWonVertical(figure) == true || hasWonDiagonallyDownLeft(figure) == true || hasWonDiagonallyDownRight(figure) == true
             || hasWonDiagonallyUpLeft(figure) == true || hasWonDiagonallyUpRight(figure) == true)
         return true;
         else
@@ -204,6 +204,16 @@ public class RoundState {
         }
 
         return false;
+    }
+
+
+    public void newRound()
+    {
+        if(isFilled() == true)
+        {
+            Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.EMPTY));
+            System.out.println("Nowa runda!");
+        }
     }
 
 
