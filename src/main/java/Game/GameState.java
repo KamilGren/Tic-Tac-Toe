@@ -28,6 +28,10 @@ public class GameState {
         numberOfDraws = 0;
     }
 
+    public RoundState getRoundState() {
+        return roundState;
+    }
+
     public Player getPlayerOne() {
         return playerOne;
     }

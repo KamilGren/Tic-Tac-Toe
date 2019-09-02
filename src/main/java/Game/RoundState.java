@@ -216,5 +216,9 @@ public class RoundState {
         }
     }
 
+    public Figure [][] getBoardFields()
+    {
+        return boardFields;
+    }
 
 }
