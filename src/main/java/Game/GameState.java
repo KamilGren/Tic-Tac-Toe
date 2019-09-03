@@ -7,8 +7,8 @@ public class GameState {
 
     private int numberOfDraws;
     private int roundsToWin;
-    private Player playerOne;
-    private Player playerTwo;
+    private static Player playerOne;
+    private static Player playerTwo;
     private RoundState roundState;
 
 
@@ -32,11 +32,11 @@ public class GameState {
         return roundState;
     }
 
-    public Player getPlayerOne() {
+    public static Player getPlayerOne() {
         return playerOne;
     }
 
-    public Player getPlayerTwo() {
+    public static Player getPlayerTwo() {
         return playerTwo;
     }
 

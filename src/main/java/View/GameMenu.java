@@ -133,7 +133,7 @@ public class GameMenu {
         Player playerOne = new Player(player1TextField.getText(), Figure.O, cPlayer1IsComputer.isSelected(), 0);
         Player playerTwo = new Player(player2TextField.getText(), Figure.X, cPlayer1IsComputer.isSelected(), 0);
 
-        if(figureBox1.getValue().equals('X'))
+        if(figureBox1.getValue().equals("X")) // mamy tu problem, stale figura gracza 1 niezaleznie od zmian to O
         {
              playerOne = new Player(player1TextField.getText(), Figure.X, cPlayer1IsComputer.isSelected(), 0);
              playerTwo = new Player(player2TextField.getText(), Figure.O, cPlayer1IsComputer.isSelected(), 0);

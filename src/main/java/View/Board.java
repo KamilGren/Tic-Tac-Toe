@@ -14,8 +14,9 @@ public class Board extends GridPane {
 
 
 
-    public Board()
+    public Board(GameState gameState)
     {
+        this.gameState = gameState;
         createBoard();
     }
 
@@ -48,6 +49,7 @@ public class Board extends GridPane {
     public GameState getGameState() {
         return gameState;
     }
+
 
 
 

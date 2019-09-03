@@ -10,8 +10,10 @@ public class RoundState {
 
 
 
+
     public RoundState() {
-        Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.O));
+        Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.EMPTY));
+
 
         /*
         System.out.println("Konstruktor z RoundState!" + boardFields[0][0] + hasFigureWon(Figure.X));
@@ -28,8 +30,6 @@ public class RoundState {
         test(Figure.O);
 
          */
-
-        System.out.println("Jakas widoczna odpowiedz: " + isDraw());
 
     }
 
@@ -219,6 +219,14 @@ public class RoundState {
     public Figure [][] getBoardFields()
     {
         return boardFields;
+    }
+
+    public int getNumberOfMoves() {
+        return (int) Arrays.stream(boardFields).
+                flatMap(row -> Arrays.stream(row)).
+                filter(field -> !field.equals(Figure.EMPTY)).
+                count();
+
     }
 
 }
