@@ -1,5 +1,6 @@
 package Window;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -32,6 +33,7 @@ public class AlertBox {
         VBox vBox = new VBox();
         vBox.getChildren().addAll(label, close);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(10, 10, 10, 10));
 
         Scene scene = new Scene(vBox);
         window.setScene(scene);

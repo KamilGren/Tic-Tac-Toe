@@ -1,6 +1,8 @@
 package Game;
 
 
+import Window.AlertBox;
+
 import java.util.Arrays;
 
 
@@ -14,28 +16,11 @@ public class RoundState {
     public RoundState() {
         Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.EMPTY));
 
-
-        /*
-        System.out.println("Konstruktor z RoundState!" + boardFields[0][0] + hasFigureWon(Figure.X));
-        System.out.println("h: " + hasWonHorizontal(Figure.O));
-        System.out.println("V: " + hasWonVertical(Figure.O));
-        System.out.println("dU: " + hasWonDiagonallyUpLeft(Figure.O));
-        System.out.println("DD: " + hasWonDiagonallyDownLeft(Figure.O));
-        System.out.println("DD: " + hasWonDiagonallyDownRight(Figure.O));
-        System.out.println("DD: " + hasWonDiagonallyUpRight(Figure.O));
-
-        do wgladu czy pojedyncze metody zwracaja prawidlowe funkcje
-
-        isTrue();
-        test(Figure.O);
-
-         */
-
     }
 
     public boolean hasFigureWon(Figure figure) {
-        if (hasWonHorizontal(figure) == true || hasWonVertical(figure) == true || hasWonDiagonallyDownLeft(figure) == true || hasWonDiagonallyDownRight(figure) == true
-            || hasWonDiagonallyUpLeft(figure) == true || hasWonDiagonallyUpRight(figure) == true)
+        if (hasWonHorizontal(figure) == true || hasWonVertical(figure) == true || hasWonDiagonallyLeft(figure) == true
+            ||  hasWonDiagonallyRight(figure) == true)
         return true;
         else
             return false;
@@ -52,15 +37,19 @@ public class RoundState {
             {
                 if(boardFields[i][j] == figure)
                 {
+                    System.out.println("ekhm: " + t);
                   t++;
+
                   if(t == 3)
                   {
-                      System.out.println("Gracz o figurze " + figure + " wygrał." + t);
+                      System.out.println("(WonHorizontal)Gracz o figurze " + figure + " wygrał." + t);
+                      t=0;
                       return true;
+
                   }
                 }
             }
-            t=0;
+           t=0;
 
         }
     return false;
@@ -78,7 +67,7 @@ public class RoundState {
                     t++;
                     if(t == 3)
                     {
-                        System.out.println("Gracz o figurze " + figure + " wygrał.");
+                        System.out.println("(WonVertical)Gracz o figurze " + figure + " wygrał.");
                         return true;
                     }
 
@@ -90,7 +79,7 @@ public class RoundState {
     return false;
     }
 
-   public boolean hasWonDiagonallyDownLeft(Figure figure)
+   public boolean hasWonDiagonallyLeft(Figure figure)
     {
         int t=0;
         for(int i=0; i <= 2; i++)
@@ -100,7 +89,7 @@ public class RoundState {
                 t++;
                 if (t == 3)
                 {
-                    System.out.println("Gracz o figurze " + figure + " wygrał.");
+                    System.out.println("(WonDiagDownLeft)Gracz o figurze " + figure + " wygrał.");
                     return true;
                 }
             }
@@ -110,42 +99,21 @@ public class RoundState {
         return false;
     }
 
-    public boolean hasWonDiagonallyUpLeft(Figure figure) {
-        int t = 0;
-        int i = 3;
-
-        while(i > 0)
-        {
-            i--;
-            if (boardFields[i][i] == figure) {
-                t++;
-                if (t == 3) {
-                    System.out.println("Gracz z " + figure + " wygrywa.");
-                    return true;
-                }
-            }
-
-
-
-
-        }
-        t = 0;
-        return false;
-    }
-
-    public boolean hasWonDiagonallyUpRight(Figure figure) {
+    public boolean hasWonDiagonallyRight(Figure figure) {
         int t = 0;
         int i = 2;
+        int j = 0;
 
         while(i >= 0)
         {
-            if(boardFields[i][i] == figure)
+            if(boardFields[j][i] == figure)
             {
-                t++;
+                t++; // sorry za to
+                j++;
                 i--;
                 if(t == 3)
                 {
-                    System.out.println("Gracz z figurą " + figure + " wygrywa.");
+                    System.out.println("(WonDiagUpRight)Gracz z figurą " + figure + " wygrywa.");
                     return true;
                 }
             }
@@ -155,32 +123,7 @@ public class RoundState {
     }
 
 
-    public boolean hasWonDiagonallyDownRight(Figure figure) {
-        int t = 0;
-        int j = 2;
 
-        for(int i =0; i <= 2; i ++) {
-
-            while (j >= 0) // uzylem while bo z forem byl jakis problem, cos z nullem
-            {
-                if(boardFields[i][j] == figure)
-                {
-                    t++;
-                    j--;
-                    if(t == 3)
-                    {
-                        System.out.println("Gracz z figurą " + figure + " wygrywa.");
-                        return true;
-                    }
-
-                }
-                else j--;
-            }
-            j = 2;
-            t = 0;
-        }
-        return false;
-    }
 
     public boolean isDraw() {
         if (hasFigureWon(Figure.O) == false && hasFigureWon(Figure.X) == false && isFilled() == true)
