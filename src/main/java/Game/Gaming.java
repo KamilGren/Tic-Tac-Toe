@@ -21,7 +21,6 @@ public class Gaming {
     {
         setFieldsReady(board);
         LOG.info(whichPlayerIsStarting(board));
-        //logger.error("This is an error message");
 
     }
 
