@@ -25,15 +25,10 @@ public class GameMenu {
         GridPane.setVgap(10);
         GridPane.setPadding(new Insets(10, 10, 10, 10));
 
-
-
         primaryStage.setMinWidth(250);
         primaryStage.setMinHeight(250);
         primaryStage.setMaxHeight(650);
         primaryStage.setMaxWidth(650);
-
-
-
 
         Label player1NameLabel = new Label("Player one name: ");
         GridPane.setConstraints(player1NameLabel, 0, 0);
@@ -83,7 +78,6 @@ public class GameMenu {
             }
         });
 
-
         Label lPlayer1IsComputer = new Label("Is computer: ");
         GridPane.setConstraints(lPlayer1IsComputer, 0, 4);
 
@@ -108,27 +102,16 @@ public class GameMenu {
 
         Button bNewGame = new Button("Play game!");
         GridPane.setConstraints(bNewGame, 2, 7, 10, 5);
-        bNewGame.setOnAction(event -> primaryStage.close()); // fajne i proste, ustawianie akcji na przycisku
-        // tak samo moglbym ustawic jakas inna akcje, np. wypisanie czegos
-
-
+        bNewGame.setOnAction(event -> primaryStage.close());
 
         GridPane.getChildren().addAll(player1NameLabel, player2NameLabel, player1TextField, player2TextField, figureBox1,
                 figureBox2, player1Figure, player2Figure, cPlayer1IsComputer, lPlayer1IsComputer, lPlayer2IsComputer,
                 roundBox, cPlayer2IsComputer, lRoundCount, bNewGame);
 
         Scene scene = new Scene(GridPane);
-
-
         primaryStage.setScene(scene);
         primaryStage.setTitle("New Game");
         primaryStage.showAndWait(); // wszystko co sie stanie po tej instrukcji dzieje sie po tym jak ten ekran zniknie
-
-
-
-        System.out.println("Is player two is a computer?" + cPlayer2IsComputer.isSelected());
-
-
 
         Player playerOne = new Player(player1TextField.getText(), Figure.O, cPlayer1IsComputer.isSelected(), 0);
         Player playerTwo = new Player(player2TextField.getText(), Figure.X, cPlayer1IsComputer.isSelected(), 0);

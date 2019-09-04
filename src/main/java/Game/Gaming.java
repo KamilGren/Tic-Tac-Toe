@@ -3,23 +3,25 @@ package Game;
 import View.Board;
 import View.Field;
 import Window.AlertBox;
-import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Background;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 
 public class Gaming {
 
-
     static Player playerFirst;
+
+    public static final Logger LOG = LogManager.getLogger();
 
     public Gaming(Board board)
     {
         setFieldsReady(board);
-        System.out.println(whichPlayerIsStarting(board));
-
+        LOG.info(whichPlayerIsStarting(board));
+        //logger.error("This is an error message");
 
     }
 
@@ -36,19 +38,21 @@ public class Gaming {
                         if(board.getGameState().getRoundState().hasFigureWon(Figure.X) == true)
                         {
                             AlertBox.display("Wygrana runda", "Wygrana runda. Gratulacje dla " + player.getPlayerName());
+                            board.checkState(board); // sprawdzanie czy zakonczyla sie runda, jesli tak to stworzenie nowej oraz reset boardu
                         }
                     }
                     else
                         {
                         field.setBackground(new Background(Field.O_FIGURE));
                         changeFigureOnBoardFields(board, field, player);
-                        System.out.println("ej: " + board.getGameState().getRoundState().getNumberOfMoves());
-                        System.out.println("Figura gracza nr 1: " + board.getGameState().getPlayerOne().getPlayerFigure());
-                        System.out.println("Figura gracza nr 2: " + board.getGameState().getPlayerTwo().getPlayerFigure());
+                        LOG.info("ej: " + board.getGameState().getRoundState().getNumberOfMoves());
+                        LOG.info("Figura gracza nr 1: " + board.getGameState().getPlayerOne().getPlayerFigure());
+                        LOG.info("Figura gracza nr 2: " + board.getGameState().getPlayerTwo().getPlayerFigure());
                             //System.out.println("Ta pozycja została wypełniona przez: " + board.getGameState().getRoundState().getBoardFields()[board.getRowIndex(field)][board.getColumnIndex(field)]);
                             if(board.getGameState().getRoundState().hasFigureWon(Figure.O) == true)
                             {
                                 AlertBox.display("Wygrana runda", "Wygrana runda. Gratulacje dla " + player.getPlayerName());
+                                board.checkState(board);
                             }
                     }
 
@@ -57,7 +61,7 @@ public class Gaming {
         }
         else
             {
-                System.out.println("Pole zajęte!");
+                LOG.warn("Pole zajęte!");
             }
 
     }
@@ -67,7 +71,7 @@ public class Gaming {
     {
         if(board.getGameState().getRoundState().getBoardFields()[a][b].equals(Figure.EMPTY))
         {
-            System.out.println("Wiemy, ze nie wypelniony.");
+            LOG.info("Odczyt metody isFieldFilled: wiemy, ze pole jest niewypelnione."); // inne odczyty mnie nie interesuja, po prostu zwroci wtedy true
             return false;
         }
         return true;
@@ -82,22 +86,18 @@ public class Gaming {
                 @Override
                 public void handle(MouseEvent event)
                 {
-                    System.out.println("Siema");
-
                     if(whoIsNext(board) == board.getGameState().getPlayerOne() )
                     {
                         doMove(board.getGameState().getPlayerOne(), board.getGameState().getPlayerOne().getPlayerFigure(),(Field) node, board);
-                        System.out.println("cze");
                     }
                     else if(whoIsNext(board) == board.getGameState().getPlayerTwo())
                     {
                         doMove(board.getGameState().getPlayerTwo(), board.getGameState().getPlayerTwo().getPlayerFigure(),(Field) node, board);
-                        System.out.println("hej");
 
                     }
                     else if (whoIsNext(board) == null)
                     {
-                        System.out.println("To by było na tyle.");
+                        LOG.info("");
                     }
 
                 }
@@ -109,7 +109,7 @@ public class Gaming {
             }
             else
             {
-                System.out.println("To nie jest przestrzeń do grania!");
+                LOG.warn("To nie jest przestrzeń do grania!"); // jesli klikniete jest cos poza Fieldami w Board
             }
 
         }
@@ -119,9 +119,9 @@ public class Gaming {
     {
         int col = board.getColumnIndex(node);
         int row = board.getRowIndex(node);
-        System.out.println(board.getGameState().getRoundState().getBoardFields()[row][col]); // przed
+        // System.out.println(board.getGameState().getRoundState().getBoardFields()[row][col]); // figura przed
         board.getGameState().getRoundState().getBoardFields()[row][col] = player.getPlayerFigure();
-        System.out.println(board.getGameState().getRoundState().getBoardFields()[row][col]); // po
+        // System.out.println(board.getGameState().getRoundState().getBoardFields()[row][col]); // figura po
     }
 
     public static Player whichPlayerIsStarting(Board board)
@@ -141,7 +141,7 @@ public class Gaming {
 
     public static Player whoIsNext(Board board) {
         int numberOfMoves = board.getGameState().getRoundState().getNumberOfMoves();
-        System.out.println("Czy my tutaj w ogole weszlismy?" + numberOfMoves);
+        LOG.info("Czy my tutaj w ogole weszlismy?", numberOfMoves);
 
         if (numberOfMoves == 0) {
             if (whichPlayerIsStarting(board) == board.getGameState().getPlayerOne()) {

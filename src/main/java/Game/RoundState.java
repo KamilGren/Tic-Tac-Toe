@@ -1,7 +1,13 @@
 package Game;
 
 
+import View.Board;
+import View.Field;
 import Window.AlertBox;
+import javafx.scene.Node;
+import javafx.scene.layout.Background;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.Arrays;
 
@@ -9,9 +15,7 @@ import java.util.Arrays;
 public class RoundState {
 
     private Figure[][] boardFields = new Figure[3][3];
-
-
-
+    private final static Logger LOG = LogManager.getLogger();
 
     public RoundState() {
         Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.EMPTY));
@@ -27,7 +31,6 @@ public class RoundState {
 
     }
 
-
     public boolean hasWonHorizontal(Figure figure)
     {
         int t=0;
@@ -37,12 +40,11 @@ public class RoundState {
             {
                 if(boardFields[i][j] == figure)
                 {
-                    System.out.println("ekhm: " + t);
                   t++;
 
                   if(t == 3)
                   {
-                      System.out.println("(WonHorizontal)Gracz o figurze " + figure + " wygrał." + t);
+                      LOG.info("(WonHorizontal)Gracz o figurze " + figure + " wygrał." + t);
                       t=0;
                       return true;
 
@@ -67,7 +69,7 @@ public class RoundState {
                     t++;
                     if(t == 3)
                     {
-                        System.out.println("(WonVertical)Gracz o figurze " + figure + " wygrał.");
+                        LOG.info("(WonVertical)Gracz o figurze " + figure + " wygrał.");
                         return true;
                     }
 
@@ -89,7 +91,7 @@ public class RoundState {
                 t++;
                 if (t == 3)
                 {
-                    System.out.println("(WonDiagDownLeft)Gracz o figurze " + figure + " wygrał.");
+                    LOG.info("(WonDiagDownLeft)Gracz o figurze " + figure + " wygrał.");
                     return true;
                 }
             }
@@ -113,7 +115,7 @@ public class RoundState {
                 i--;
                 if(t == 3)
                 {
-                    System.out.println("(WonDiagUpRight)Gracz z figurą " + figure + " wygrywa.");
+                    LOG.info("(WonDiagUpRight)Gracz z figurą " + figure + " wygrywa.");
                     return true;
                 }
             }
@@ -155,7 +157,7 @@ public class RoundState {
         if(isFilled() == true)
         {
             Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.EMPTY));
-            System.out.println("Nowa runda!");
+            LOG.info("Nowa runda!");
         }
     }
 
@@ -171,5 +173,7 @@ public class RoundState {
                 count();
 
     }
+
+
 
 }

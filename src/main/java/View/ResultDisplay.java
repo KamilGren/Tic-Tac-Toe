@@ -21,7 +21,6 @@ public class ResultDisplay {
         Score.setTextFill(Color.GREEN);
         Score.setText("Name: ");
 
-
         Label Round = new Label();
         Round.setFont(Font.font("Cambria", 24));
         Round.setTextFill(Color.GREEN);
@@ -41,9 +40,6 @@ public class ResultDisplay {
         Round.setFont(Font.font("Cambria", 24));
         Round.setTextFill(Color.GREEN);
         Round.setText("Rounds needed to win: ");
-
-
-        //System.out.println(gameState.getPlayerOne().getPlayerName());
 
         resultDisplay.getChildren().addAll(Score, Round, lPlayer1WonRounds, lPlayer2WonRounds, roundsNeededToWin);
 

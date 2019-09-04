@@ -2,6 +2,8 @@ package Game;
 
 
 import Window.AlertBox;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GameState {
 
@@ -10,6 +12,7 @@ public class GameState {
     private static Player playerOne;
     private static Player playerTwo;
     private RoundState roundState;
+    private final static Logger LOG = LogManager.getLogger();
 
 
     public GameState(Player playerOne, Player playerTwo, int roundsToWin) {
@@ -57,13 +60,16 @@ public class GameState {
         boolean RoundOver = true;
 
         if (roundState.hasFigureWon(getPlayerOne().getPlayerFigure()) == true) {
-            System.out.println("Gracz pierwszy wygrywa rundę!");
+            LOG.info("Gracz pierwszy wygrywa rundę!");
+            playerOneWonRound();
+
         }
         else if (roundState.hasFigureWon(getPlayerTwo().getPlayerFigure()) == true) {
-            System.out.println("Gracz drugi wygrywa rundę!");
+            LOG.info("Gracz drugi wygrywa rundę!");
+            playerTwoWonRound();
         }
         else if (roundState.isDraw() == true) {
-            System.out.println("Mamy remis!");
+            LOG.info("Mamy remis!");
         }
         else
         {
@@ -76,13 +82,14 @@ public class GameState {
     public boolean isGameOver() {
         boolean isGameOver = true;
 
-        if (playerOne.getPlayerRoundWon() < roundsToWin && playerTwo.getPlayerRoundWon() < roundsToWin)
+        if (playerOne.getPlayerRoundWon() < roundsToWin && playerTwo.getPlayerRoundWon() < roundsToWin) {
             isGameOver = false;
-
+        }
         String winnerName;
         if (playerOne.getPlayerRoundWon() > playerTwo.getPlayerRoundWon()) {
             winnerName = playerOne.getPlayerName();
-        } else {
+        }
+        else {
             winnerName = playerTwo.getPlayerName();
         }
 

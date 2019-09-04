@@ -21,7 +21,7 @@ public class TicTacToe extends Application {
     {
         GameState gameState = GameMenu.display();
 
-        Board board =  new Board(gameState); // to co nas czeka czyli stworzenie Boarda, ktory bedzie tworzyl Fieldy (te labele w ktorym beda stawiane figury
+        Board board =  new Board(gameState);
         Menu menu = new Menu(board, primaryStage);
         board.setAlignment(Pos.CENTER);
         BorderPane border = new BorderPane();
