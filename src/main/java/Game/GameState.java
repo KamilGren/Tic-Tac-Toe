@@ -80,24 +80,21 @@ public class GameState {
     }
 
     public boolean isGameOver() {
-        boolean isGameOver = true;
 
         if (playerOne.getPlayerRoundWon() < roundsToWin && playerTwo.getPlayerRoundWon() < roundsToWin) {
-            isGameOver = false;
+            return false;
         }
         String winnerName;
         if (playerOne.getPlayerRoundWon() > playerTwo.getPlayerRoundWon()) {
             winnerName = playerOne.getPlayerName();
         }
-        else {
+        else
+            {
             winnerName = playerTwo.getPlayerName();
         }
 
         AlertBox.display("End of game", winnerName + "won the game!");
-
         return true;
-
-
     }
 
 
