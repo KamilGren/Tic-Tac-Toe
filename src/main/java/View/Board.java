@@ -31,7 +31,7 @@ public class Board extends GridPane {
             }
 
         }
-        add(ResultDisplay.display(gameState), 3, 0, 1, 2 );
+        add(ResultDisplay.display(gameState, this), 3, 0, 1, 2 );
     }
 
     private void clean() {
@@ -67,6 +67,7 @@ public class Board extends GridPane {
     public GameState getGameState() {
         return gameState;
     }
+
 
 
 

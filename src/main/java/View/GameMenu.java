@@ -14,6 +14,8 @@ import javafx.stage.Stage;
 
 public class GameMenu {
 
+    public static boolean undoAble;
+
 
     public static GameState display() {
 
@@ -24,6 +26,7 @@ public class GameMenu {
         GridPane.setHgap(10);
         GridPane.setVgap(10);
         GridPane.setPadding(new Insets(10, 10, 10, 10));
+
 
         primaryStage.setMinWidth(250);
         primaryStage.setMinHeight(250);
@@ -92,12 +95,19 @@ public class GameMenu {
         GridPane.setConstraints(cPlayer2IsComputer, 3, 4);
 
         Label lRoundCount = new Label("Number of rounds: ");
-        GridPane.setConstraints(lRoundCount, 1, 6);
+        GridPane.setConstraints(lRoundCount, 2, 6);
 
         ChoiceBox<Integer> roundBox = new ChoiceBox<>();
         roundBox.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9);
         roundBox.setValue(3);
-        GridPane.setConstraints(roundBox, 2,6);
+        GridPane.setConstraints(roundBox, 3,6);
+
+        Label lUndoChoose = new Label("Enable undo moves: ");
+        GridPane.setConstraints(lUndoChoose, 0, 6);
+
+
+        CheckBox cUndoAble = new CheckBox();
+        GridPane.setConstraints(cUndoAble, 1,6);
 
 
         Button bNewGame = new Button("Play game!");
@@ -106,21 +116,27 @@ public class GameMenu {
 
         GridPane.getChildren().addAll(player1NameLabel, player2NameLabel, player1TextField, player2TextField, figureBox1,
                 figureBox2, player1Figure, player2Figure, cPlayer1IsComputer, lPlayer1IsComputer, lPlayer2IsComputer,
-                roundBox, cPlayer2IsComputer, lRoundCount, bNewGame);
+                roundBox, cPlayer2IsComputer, lRoundCount, bNewGame, lUndoChoose, cUndoAble);
 
         Scene scene = new Scene(GridPane);
         primaryStage.setScene(scene);
         primaryStage.setTitle("New Game");
         primaryStage.showAndWait(); // wszystko co sie stanie po tej instrukcji dzieje sie po tym jak ten ekran zniknie
 
+
+
         Player playerOne = new Player(player1TextField.getText(), Figure.O, cPlayer1IsComputer.isSelected(), 0);
         Player playerTwo = new Player(player2TextField.getText(), Figure.X, cPlayer1IsComputer.isSelected(), 0);
 
-        if(figureBox1.getValue().equals("X")) // mamy tu problem, stale figura gracza 1 niezaleznie od zmian to O
+        undoAble = cUndoAble.isSelected();
+
+        if(figureBox1.getValue().equals("X"))
         {
              playerOne = new Player(player1TextField.getText(), Figure.X, cPlayer1IsComputer.isSelected(), 0);
              playerTwo = new Player(player2TextField.getText(), Figure.O, cPlayer1IsComputer.isSelected(), 0);
         }
+
+
 
 
         return new GameState(playerOne, playerTwo, roundBox.getValue());

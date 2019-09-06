@@ -114,13 +114,25 @@ public class Gaming {
         }
     }
 
+    static int i = 0; // zliczanie ilosci wywolanej metody
+    public static Figure [] TabOfFigure = new Figure [8];
+
     public static void changeFigureOnBoardFields(Board board, Node node, Player player)
     {
         int col = board.getColumnIndex(node);
         int row = board.getRowIndex(node);
+        Figure figure =  player.getPlayerFigure();
+        int numberOfMoves = board.getGameState().getRoundState().getNumberOfMoves();
+        System.out.println("col: " + col);
+
+
+        if(numberOfMoves >=1) { // ilosc ruchow nie moze miec 0 jesli chce zapisac ruch
+            board.getGameState().getRoundState().saveField(row, col, figure, board.getGameState().getRoundState().getNumberOfMoves()-1);
+        }
+
         // System.out.println(board.getGameState().getRoundState().getBoardFields()[row][col]); // figura przed
         board.getGameState().getRoundState().getBoardFields()[row][col] = player.getPlayerFigure();
-        // System.out.println(board.getGameState().getRoundState().getBoardFields()[row][col]); // figura po
+
     }
 
     public static Player whichPlayerIsStarting(Board board)
@@ -140,7 +152,6 @@ public class Gaming {
 
     public static Player whoIsNext(Board board) {
         int numberOfMoves = board.getGameState().getRoundState().getNumberOfMoves();
-        LOG.info("Czy my tutaj w ogole weszlismy?", numberOfMoves);
 
         if (numberOfMoves == 0) {
             if (whichPlayerIsStarting(board) == board.getGameState().getPlayerOne()) {

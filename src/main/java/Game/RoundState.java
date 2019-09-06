@@ -9,13 +9,19 @@ import javafx.scene.layout.Background;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
 public class RoundState {
 
-    private Figure[][] boardFields = new Figure[3][3];
+    public static Figure[][] boardFields = new Figure[3][3];
     private final static Logger LOG = LogManager.getLogger();
+    public static Figure[][] saveField = new Figure[3][3];
+    public static Figure[] tableOfFigures = new Figure[8];
+    public static int[] rowIndex = new int[8];
+    public static int[] colIndex = new int[8];
+    public static int Column, Row;
 
     public RoundState() {
         Arrays.stream(boardFields).forEach(a -> Arrays.fill(a, Figure.EMPTY));
@@ -172,6 +178,86 @@ public class RoundState {
                 filter(field -> !field.equals(Figure.EMPTY)).
                 count();
 
+    }
+
+    public static void saveField(int row, int col, Figure figure, int numberOfMove) {
+
+        //tutaj jest problem zapisu do rzedow i kolumn
+        Column = col;
+        Row = row;
+
+
+        if (numberOfMove == 0) {
+            rowIndex[0] = Row; // numer rzedu
+            colIndex[0] = Column;
+        }
+        else if (numberOfMove >=1)
+        {
+            rowIndex[numberOfMove] = Row; // numer rzedu
+            colIndex[numberOfMove] = Column; // numer kolumny
+            saveField[Row][Column] = figure; // jaka figura
+            tableOfFigures[numberOfMove] = saveField[Row][Column]; // konkretna figura na konkretnym polu (o numerze wykonanego ruchu)
+        }
+
+        LOG.info("Zapisuje dane tego Fielda: " + rowIndex[numberOfMove] + " " + colIndex[numberOfMove] + " " +  saveField[Row][Column] + " " + tableOfFigures[numberOfMove]);
+
+        // fieldsNumber.add(numberOfMove, );  (chwila zamyslu nad ArrayList fieldsNumber = new ArrayList();)
+}
+
+    public static void undoMove(Board board, Field field) {
+        int actualMove = board.getGameState().getRoundState().getNumberOfMoves();
+
+        if (actualMove > 0 && actualMove < 9) {
+            LOG.info("Oczyszczam boardFields oraz background na tym Fieldzie");
+            board.getGameState().getRoundState().getBoardFields()[rowIndex[actualMove-1]][colIndex[actualMove-1]] = Figure.EMPTY;
+            field.setBackground(Background.EMPTY);
+
+        }
+    }
+
+    public static Field getField(int numberOfMoves, Board board)
+    {
+
+        for(Node child :  board.getChildren())
+        {
+            int r = board.getRowIndex(child);
+            int c = board.getColumnIndex(child);
+
+
+            if(numberOfMoves == 0)
+            {
+                LOG.info("Ilosc ruchow: " + (numberOfMoves));
+                return null;
+            }
+            else if(r == rowIndex[numberOfMoves] && c == colIndex[numberOfMoves])
+            {
+                LOG.info("Mamy to! " + "numberOfMove: " + numberOfMoves + "R: " + r + "C: " + c + "RowIndex: " + rowIndex[numberOfMoves] + "ColIndex: " + colIndex[numberOfMoves]);
+
+                for(int a : rowIndex)
+                {
+                    System.out.print("RowIndex: " + a + " ");
+                }
+
+                System.out.print("RowIndex[numberOfMoves] " + rowIndex[numberOfMoves]);
+                System.out.println("ColIndex[numberOfMoves] " + colIndex[numberOfMoves]);
+                for(int b : colIndex)
+                {
+                    System.out.print("ColIndex: " + b + " ");
+
+                }
+
+                return (Field) child;
+            }
+            else
+            {
+                LOG.warn("Nie udalo sie zwrocic zadnego Fielda spelniajacego zadanie");
+
+                LOG.warn("numberOfMove: " + numberOfMoves + "r: " + r + "c: " + c + "rowIndex: " + rowIndex + "colIndex: " + colIndex);
+                return null;
+            }
+        }
+
+    return null;
     }
 
 
