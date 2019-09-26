@@ -73,6 +73,7 @@ public class ResultDisplay {
                     LOG.info("ilosc wykonanych ruchow: " + board.getGameState().getRoundState().getNumberOfMoves());
                     board.getGameState().getRoundState().undoMove(board, board.getGameState().getRoundState().getField(board.getGameState().getRoundState().getNumberOfMoves()-1, board));
                     //(planszaktorajestzaladowana(PKJZ).undoMove(PKJZ, PKJZ.getField(PKJZ.iloscWykonanychRuchowWTejRundzie,PKJZ). // dobra niby cos jasniej ale jak cos to pytac
+                    // sprawdz co bedzie jak dasz wstecz przy zadnym wypelnionym polu
                 }
             };
 
