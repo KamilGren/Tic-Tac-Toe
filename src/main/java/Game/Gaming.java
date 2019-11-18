@@ -36,6 +36,7 @@ public class Gaming {
                         //System.out.println("Ta pozycja została wypełniona przez: " + board.getGameState().getRoundState().getBoardFields()[board.getRowIndex(field)][board.getColumnIndex(field)]);
                         if(board.getGameState().getRoundState().hasFigureWon(Figure.X) == true)
                         {
+                            //LOG.info("Czy ja tutaj w ogóle wszedłem?");
                             AlertBox.display("Wygrana runda", "Wygrana runda. Gratulacje dla " + player.getPlayerName());
                             board.checkState(board); // sprawdzanie czy zakonczyla sie runda, jesli tak to stworzenie nowej oraz reset boardu
                         }
@@ -44,12 +45,13 @@ public class Gaming {
                         {
                         field.setBackground(new Background(Field.O_FIGURE));
                         changeFigureOnBoardFields(board, field, player);
-                        LOG.info("ej: " + board.getGameState().getRoundState().getNumberOfMoves());
+                        LOG.info("Ilosc wykonanych ruchow: " + board.getGameState().getRoundState().getNumberOfMoves());
                         LOG.info("Figura gracza nr 1: " + board.getGameState().getPlayerOne().getPlayerFigure());
                         LOG.info("Figura gracza nr 2: " + board.getGameState().getPlayerTwo().getPlayerFigure());
                             //System.out.println("Ta pozycja została wypełniona przez: " + board.getGameState().getRoundState().getBoardFields()[board.getRowIndex(field)][board.getColumnIndex(field)]);
                             if(board.getGameState().getRoundState().hasFigureWon(Figure.O) == true)
                             {
+                                //LOG.info("Czy ja tutaj w ogóle wszedłem?");
                                 AlertBox.display("Wygrana runda", "Wygrana runda. Gratulacje dla " + player.getPlayerName());
                                 board.checkState(board);
                             }
@@ -123,7 +125,7 @@ public class Gaming {
         int row = board.getRowIndex(node);
         Figure figure =  player.getPlayerFigure();
         int numberOfMoves = board.getGameState().getRoundState().getNumberOfMoves();
-        System.out.println("col: " + col);
+        //System.out.println("col: " + col);
 
 
         if(numberOfMoves >=1) { // ilosc ruchow nie moze miec 0 jesli chce zapisac ruch

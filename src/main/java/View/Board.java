@@ -2,12 +2,7 @@ package View;
 
 import Game.GameState;
 import Game.Gaming;
-import javafx.event.EventHandler;
-import javafx.scene.Node;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 
 public class Board extends GridPane {
 
