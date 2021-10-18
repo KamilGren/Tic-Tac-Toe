@@ -3,25 +3,25 @@
 
 ## Table of contents
 * [General info](#general-info)
-* [Screenshots](#screenshots)
 * [Technologies](#technologies)
 * [Setup](#setup)
 * [Features](#features)
-* [Status](#status)
 * [Contact](#contact)
 
 ## General info
-My motivation to create this project was to learn more about Java and teach how to create application with GUI with JavaFX.
+My motivation to create this project was to learn more about Java and teach how to create application with GUI with JavaFX. This is my first project which I'm showing on GitHub. 
+
+10.2021 Edit: Now I create cleaner code ;)
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+[![TICTAC.png](https://i.postimg.cc/ZYvWNLs3/TICTAC.png)](https://postimg.cc/Jtm7VjL4)
 
 ## Technologies
 * Java 8
 * JavaFX
 
 ## Setup
-It's easy to start play in Tic-Tac-Toe. After cloning repository compile project and run it. Now it's a small problem with *JAR file. I'm working on it.
+It's easy to start play in Tic-Tac-Toe. After cloning repository compile project and run it. 
 
 ## Code Examples
 Here we have code which generates order of players moves:
@@ -61,12 +61,6 @@ List of features ready and TODOs for future development:
 * Add computer AI
 * Add save/load
 * Make Tic-Tac-Toe for 5 FIGURES TO WIN!
-
-To-do list:
-* improve working of move back arrow
-
-## Status
-Project is in progress (but you can play with pleasure)
 
 ## Contact
 Created by [KamilMateuszGreń](Kamilogren@gmail.com)- feel free to contact me!
