@@ -11,7 +11,7 @@
 ## General info
 My motivation to create this project was to learn more about Java and teach how to create application with GUI with JavaFX. This is my first project which I'm showing on GitHub. 
 
-10.2021 Edit: Now I create cleaner code ;)
+10.2021 Edit: Now I create cleaner code ;) No more spaghetti :v only vegan 
 
 ## Screenshots
 [![TICTAC.png](https://i.postimg.cc/ZYvWNLs3/TICTAC.png)](https://postimg.cc/Jtm7VjL4)
